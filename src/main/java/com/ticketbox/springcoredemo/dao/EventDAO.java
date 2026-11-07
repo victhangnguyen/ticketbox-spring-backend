@@ -11,9 +11,13 @@ public interface EventDAO {
     // Save a new event / Luu mot su kien moi
     void save(Event event);
 
-    //! Bước 1: Thêm phương thức Đọc theo Khóa Chính (Trả về null nếu không tìm thấy)
+    //! Thêm phương thức Đọc theo Khóa Chính (Trả về null nếu không tìm thấy)
     Event findById(int id);
 
-    // Bước 1: Thêm phương thức Lấy toàn bộ danh sách Sự kiện
+    // Thêm phương thức Lấy toàn bộ danh sách Sự kiện
     List<Event> findAll();
+
+    // Thêm phương thức Lấy danh sách Sự kiện theo Tên Tổ chức
+    List<Event> findByOrganizerName(String organizerName);
+
 }

@@ -36,12 +36,27 @@ public class EventDAOImpl implements EventDAO {
     return entityManager.find(Event.class, id);
   }
 
-  // Bước 2: JPQL "FROM Event" - Event là tên Entity (class), KHÔNG phải tên bảng
+  // JPQL "FROM Event" - Event là tên Entity (class), KHÔNG phải tên bảng
   // "event"
   // Chỉ đọc dữ liệu nên không cần @Transactional
   @Override
   public List<Event> findAll() {
     TypedQuery<Event> theQuery = entityManager.createQuery("FROM Event", Event.class);
+    return theQuery.getResultList();
+  }
+
+  // JPQL "FROM Event WHERE organizerName = :theData" - Event là tên Entity (class), KHÔNG phải tên bảng "event"
+  // Chỉ đọc dữ liệu nên không cần @Transactional
+  @Override
+  public List<Event> findByOrganizerName(String organizerName) {
+    // Create query with a named parameter / Tao query voi tham so co ten
+    TypedQuery<Event> theQuery = entityManager.createQuery(
+        "FROM Event WHERE organizerName = :theData", Event.class);
+
+    // Set the parameter value / Dien gia tri cho tham so (ten KHONG kem dau ":")
+    theQuery.setParameter("theData", organizerName);
+
+    // Return the query results / Tra ve ket qua
     return theQuery.getResultList();
   }
 

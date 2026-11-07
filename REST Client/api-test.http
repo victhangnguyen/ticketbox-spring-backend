@@ -24,3 +24,10 @@ Content-Type: application/json
 
 ### GET EVENT BY ID
 GET http://localhost:8080/api/events/2
+
+
+### GET EVENTS
+GET http://localhost:8080/api/events
+
+### GET EVENTS FILTERED BY ORGANIZER - Lọc theo nhà tổ chức
+GET http://localhost:8080/api/events?organizer=Jazz%20Club

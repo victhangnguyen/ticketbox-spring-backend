@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -46,6 +47,16 @@ public class EventController {
       eventDAO.save(event); // moi lan save() la mot transaction rieng
     }
     return events;
+  }
+
+  // C07L07-02: Lấy danh sách sự kiện nếu có tham số organizer thì lọc theo tên
+  // nhà tổ chức
+  @GetMapping("/api/events")
+  public List<Event> getEvents(@RequestParam(required = false) String organizer) {
+    if (organizer == null || organizer.isBlank()) {
+      return eventDAO.findAll();
+    }
+    return eventDAO.findByOrganizerName(organizer);
   }
 
   // Endpoint moi: doc mot su kien theo khoa chinh
