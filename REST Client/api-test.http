@@ -1,0 +1,26 @@
+### GET EVENT
+GET http://localhost:8080/api/events/sample
+
+### Gửi request tạo event
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "eventName": "Hoi Cho Sach 2026",
+  "organizerName": "NXB Tre",
+  "ticketPrice": 0
+}
+
+### Link URL của Controller để vận hành Output: POST http://localhost:8080/api/events/batch — thân request (JSON):
+
+POST http://localhost:8080/api/events/batch
+Content-Type: application/json
+
+[
+  { "eventName": "Hoi Thao AI 2026",  "organizerName": "AI Vietnam",   "ticketPrice": 0 },
+  { "eventName": "Trien Lam Anh",     "organizerName": "Studio Sang",  "ticketPrice": 50000 },
+  { "eventName": "Khoa Hoc Python",   "organizerName": "Code Academy", "ticketPrice": 1200000 }
+]
+
+### GET EVENT BY ID
+GET http://localhost:8080/api/events/2

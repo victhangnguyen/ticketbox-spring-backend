@@ -1,0 +1,19 @@
+// Path: src/main/java/com/ticketbox/springcoredemo/dao/EventDAO.java
+package com.ticketbox.springcoredemo.dao;
+
+import java.util.List;
+
+import com.ticketbox.springcoredemo.entity.Event;
+
+// Buoc 1: DAO interface - dinh nghia "hop dong" thao tac du lieu cho Event
+public interface EventDAO {
+
+    // Save a new event / Luu mot su kien moi
+    void save(Event event);
+
+    //! Bước 1: Thêm phương thức Đọc theo Khóa Chính (Trả về null nếu không tìm thấy)
+    Event findById(int id);
+
+    // Bước 1: Thêm phương thức Lấy toàn bộ danh sách Sự kiện
+    List<Event> findAll();
+}
