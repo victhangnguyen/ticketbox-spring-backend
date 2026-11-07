@@ -1,8 +1,30 @@
 // Path: src/main/java/com/ticketbox/springcoredemo/SpringcoredemoApplication.java
+// package com.ticketbox.springcoredemo;
+
+// import org.springframework.boot.SpringApplication;
+// import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+// @SpringBootApplication
+// public class SpringcoredemoApplication {
+
+//     public static void main(String[] args) {
+//         SpringApplication.run(SpringcoredemoApplication.class, args);
+//     }
+
+//     // CommandLineRunner cua Vi du 1 da duoc go bo de tranh luu trung du lieu moi lan khoi dong
+// }
+
+// ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+// Example_01_VSCode_Spring_V3_C03L07_Querying Objects with JPA_26-10-26
 package com.ticketbox.springcoredemo;
 
+import com.ticketbox.springcoredemo.dao.EventDAO;
+import com.ticketbox.springcoredemo.entity.Event;
+import java.util.List;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringcoredemoApplication {
@@ -11,7 +33,21 @@ public class SpringcoredemoApplication {
         SpringApplication.run(SpringcoredemoApplication.class, args);
     }
 
-    // CommandLineRunner cua Vi du 1 da duoc go bo de tranh luu trung du lieu moi lan khoi dong
+    @Bean
+    public CommandLineRunner commandLineRunner(EventDAO eventDAO) {
+        return runner -> queryForEvents(eventDAO);
+    }
+
+    // Buoc 3: lay danh sach su kien va hien thi tung su kien
+    private void queryForEvents(EventDAO eventDAO) {
+        // Get list of events / Lay danh sach su kien
+        List<Event> theEvents = eventDAO.findAll();
+
+        // Display list of events / Hien thi danh sach
+        for (Event tempEvent : theEvents) {
+            System.out.println(tempEvent);
+        }
+    }
 }
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
