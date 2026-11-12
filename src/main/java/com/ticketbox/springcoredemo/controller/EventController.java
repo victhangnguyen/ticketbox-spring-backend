@@ -73,4 +73,11 @@ public class EventController {
     return ResponseEntity.ok(event); // HTTP 200 + du lieu
   }
 
+  // Tìm kiếm theo từ khóa. Đường dẫn có cố định "/search" được ưu tiên trước
+  // "/{id}" để tránh nhầm lẫn với ID.
+  @GetMapping("/api/events/search")
+  public List<Event> searchEvents(@RequestParam String keyword) {
+    return eventDAO.searchByKeyword(keyword);
+  }
+
 }

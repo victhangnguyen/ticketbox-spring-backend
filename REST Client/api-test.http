@@ -31,3 +31,8 @@ GET http://localhost:8080/api/events
 
 ### GET EVENTS FILTERED BY ORGANIZER - Lọc theo nhà tổ chức
 GET http://localhost:8080/api/events?organizer=Jazz%20Club
+
+### GET EVENTS SEARCH BY KEYWORD - Tìm kiếm theo từ khóa
+GET http://localhost:8080/api/events/search?keyword=jazz
+### GET EVENTS SEARCH BY KEYWORD - Tìm kiếm theo từ khóa (không có kết quả)
+GET http://localhost:8080/api/events/search?keyword=xyz

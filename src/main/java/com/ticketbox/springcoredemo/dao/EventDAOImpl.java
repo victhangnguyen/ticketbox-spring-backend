@@ -45,7 +45,8 @@ public class EventDAOImpl implements EventDAO {
     return theQuery.getResultList();
   }
 
-  // JPQL "FROM Event WHERE organizerName = :theData" - Event là tên Entity (class), KHÔNG phải tên bảng "event"
+  // JPQL "FROM Event WHERE organizerName = :theData" - Event là tên Entity
+  // (class), KHÔNG phải tên bảng "event"
   // Chỉ đọc dữ liệu nên không cần @Transactional
   @Override
   public List<Event> findByOrganizerName(String organizerName) {
@@ -58,6 +59,19 @@ public class EventDAOImpl implements EventDAO {
 
     // Return the query results / Tra ve ket qua
     return theQuery.getResultList();
+  }
+
+  @Override
+  public List<Event> searchByKeyword(String keyword) {
+    // ! Một tham số có tên ":kw" được sử dụng ở cả hai điều kiện OR
+    TypedQuery<Event> theQuery = entityManager.createQuery(
+        "FROM Event WHERE eventName LIKE :kw OR organizerName LIKE :kw", Event.class);
+
+    // ! Ký tự % được thêm vào giá trị tham số để khớp một phần chuỗi ở bất kỳ vị
+    // trí nào
+    theQuery.setParameter("kw", "%" + keyword + "%");
+
+    return theQuery.getResultList(); // Danh sách rỗng nếu không có dòng nào khớp
   }
 
 }
