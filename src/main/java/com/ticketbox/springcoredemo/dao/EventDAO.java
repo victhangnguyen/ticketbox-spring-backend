@@ -23,4 +23,7 @@ public interface EventDAO {
   // Tìm theo từ khóa trong tên sự kiện hoặc tên nhà tổ chức
   List<Event> searchByKeyword(String keyword);
 
+  // Thêm phương thức Cập nhật một sự kiện
+  void update(Event event);
+
 }

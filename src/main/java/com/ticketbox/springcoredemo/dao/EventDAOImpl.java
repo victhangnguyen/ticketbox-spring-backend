@@ -74,4 +74,11 @@ public class EventDAOImpl implements EventDAO {
     return theQuery.getResultList(); // Danh sách rỗng nếu không có dòng nào khớp
   }
 
+  // Thao tác ghi dữ liệu nên bắt buộc phải có @Transactional; merge sẽ lưu các thay đổi xuống database
+  @Override
+  @Transactional
+  public void update(Event event) {
+    entityManager.merge(event);
+  }
+
 }
