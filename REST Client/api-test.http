@@ -36,3 +36,14 @@ GET http://localhost:8080/api/events?organizer=Jazz%20Club
 GET http://localhost:8080/api/events/search?keyword=jazz
 ### GET EVENTS SEARCH BY KEYWORD - Tìm kiếm theo từ khóa (không có kết quả)
 GET http://localhost:8080/api/events/search?keyword=xyz
+
+
+### PUT EVENT - Cập nhật thông tin sự kiện
+PUT http://localhost:8080/api/events/4
+Content-Type: application/json
+
+{
+  "eventName": "Dem Nhac Jazz",
+  "organizerName": "Jazz Club",
+  "ticketPrice": 380000
+}
