@@ -4,6 +4,7 @@ package com.ticketbox.springcoredemo.dao;
 import com.ticketbox.springcoredemo.entity.Event;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.Query;
 
 import java.util.List;
 
@@ -74,11 +75,26 @@ public class EventDAOImpl implements EventDAO {
     return theQuery.getResultList(); // Danh sách rỗng nếu không có dòng nào khớp
   }
 
-  // Thao tác ghi dữ liệu nên bắt buộc phải có @Transactional; merge sẽ lưu các thay đổi xuống database
+  // Thao tác ghi dữ liệu nên bắt buộc phải có @Transactional; merge sẽ lưu các
+  // thay đổi xuống database
   @Override
   @Transactional
   public void update(Event event) {
     entityManager.merge(event);
+  }
+
+  // C03L08-03: Đổi giá vé hàng loạt theo nhà tổ chức, trả về số dòng đã cập nhật
+  @Override
+  @Transactional
+  public int updateTicketPriceByOrganizer(String organizerName, int newPrice) {
+    // Event là tên Entity (class), ticketPrice/organizerName là tên field Java, KHÔNG phải tên cột trong bảng
+    // Dùng Query thường (không phải TypedQuery) vì UPDATE không trả về danh sách Event
+    Query theQuery = entityManager.createQuery(
+        "UPDATE Event SET ticketPrice = :newPrice WHERE organizerName = :org");
+    theQuery.setParameter("newPrice", newPrice);
+    theQuery.setParameter("org", organizerName);
+
+    return theQuery.executeUpdate(); // so dong bi anh huong
   }
 
 }

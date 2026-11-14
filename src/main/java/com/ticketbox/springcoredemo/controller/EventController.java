@@ -4,6 +4,7 @@ package com.ticketbox.springcoredemo.controller;
 import com.ticketbox.springcoredemo.dao.EventDAO;
 import com.ticketbox.springcoredemo.entity.Event;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -81,7 +82,8 @@ public class EventController {
     return eventDAO.searchByKeyword(keyword);
   }
 
-  // Cập nhật một sự kiện theo ID. Nếu sự kiện không tồn tại, trả về 404; nếu thành công, trả về 200 kèm dữ liệu mới.
+  // Cập nhật một sự kiện theo ID. Nếu sự kiện không tồn tại, trả về 404; nếu
+  // thành công, trả về 200 kèm dữ liệu mới.
   @PutMapping("/api/events/{id}")
   public ResponseEntity<Event> updateEvent(@PathVariable int id, @RequestBody Event updated) {
     Event existing = eventDAO.findById(id);
@@ -89,14 +91,25 @@ public class EventController {
       return ResponseEntity.notFound().build();
     }
 
-    // Chép giá trị mới vào đối tượng hiện có; id lấy từ đường dẫn, không lấy từ thân request
+    // Chép giá trị mới vào đối tượng hiện có; id lấy từ đường dẫn, không lấy từ
+    // thân request
     existing.setEventName(updated.getEventName());
     existing.setOrganizerName(updated.getOrganizerName());
     existing.setTicketPrice(updated.getTicketPrice());
 
-    //! Merge sẽ lưu các thay đổi xuống EntityManager và database; cần @Transactional trong DAO
+    // ! Merge sẽ lưu các thay đổi xuống EntityManager và database; cần
+    // @Transactional trong DAO
     eventDAO.update(existing);
     return ResponseEntity.ok(existing);
+  }
+
+  // C03L08-03: Đổi giá hàng loạt. Đường dẫn cố định "/price" được ưu tiên trước
+  // "/{id}" để tránh nhầm lẫn với ID.
+  @PutMapping("/api/events/price")
+  public Map<String, Integer> updatePriceByOrganizer(@RequestParam String organizer,
+      @RequestParam int newPrice) {
+    int rows = eventDAO.updateTicketPriceByOrganizer(organizer, newPrice);
+    return Map.of("updatedRows", rows);
   }
 
 }

@@ -26,4 +26,7 @@ public interface EventDAO {
   // Thêm phương thức Cập nhật một sự kiện
   void update(Event event);
 
+  // C03L08-03: Đổi giá vé hàng loạt theo nhà tổ chức, trả về số dòng đã cập nhật
+  int updateTicketPriceByOrganizer(String organizerName, int newPrice);
+
 }

@@ -47,3 +47,7 @@ Content-Type: application/json
   "organizerName": "Jazz Club",
   "ticketPrice": 380000
 }
+
+### C03L08-03: Đổi giá hàng loạt
+PUT http://localhost:8080/api/events/price?organizer=Code%20Academy&newPrice=1000
+Content-Type: application/json
