@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,10 +43,9 @@ public class EventController {
   public ResponseEntity<Event> createEvent(@RequestBody Event event) {
     eventDAO.save(event); // persist -> INSERT
     // return event; // event luc nay da co id do MySQL sinh ra
-    //! CREATE: tra ve HTTP 201 + du lieu moi tao
+    // ! CREATE: tra ve HTTP 201 + du lieu moi tao
     return ResponseEntity.status(HttpStatus.CREATED).body(event);
   }
-
 
   // Endpoint moi: luu nhieu su kien, tra ve danh sach kem id do MySQL cap
   @PostMapping("/api/events/batch")
@@ -118,4 +118,17 @@ public class EventController {
     return Map.of("updatedRows", rows);
   }
 
+  // C03L09-02: Bước 2: Controller - Xóa một Event.
+  // 404 nếu không tồn tại, 204 nếu đã xóa
+
+  @DeleteMapping("/api/events/{id}")
+  public ResponseEntity<Void> deleteEvent(@PathVariable int id) {
+    if (eventDAO.findById(id) == null) {
+      // Không có gì để xóa
+      return ResponseEntity.notFound().build();
+    }
+    // find + remove trong transaction
+    eventDAO.delete(id);
+    return ResponseEntity.noContent().build(); // HTTP 204
+  }
 }

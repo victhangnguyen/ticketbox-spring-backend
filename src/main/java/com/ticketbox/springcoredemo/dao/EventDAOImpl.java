@@ -110,5 +110,4 @@ public class EventDAOImpl implements EventDAO {
     // Delete the event / Xóa sự kiện (theEvent phải khác null)
     entityManager.remove(theEvent);
   }
-
 }

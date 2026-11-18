@@ -49,10 +49,10 @@ public class TicketController {
     return paymentGatewayService.processPayment(eventName, amount);
   }
 
-    // Endpoint tam thoi de xac nhan Entity anh xa dung cau truc (CHUA luu database)
-    @GetMapping("/api/events/preview")
-    public String previewEvent() {
-        Event event = new Event("Music Festival 2026", "TicketBox Organizer", 500000);
-        return event.toString();
-    }
+  // Endpoint tam thoi de xac nhan Entity anh xa dung cau truc (CHUA luu database)
+  @GetMapping("/api/events/preview")
+  public String previewEvent() {
+    Event event = new Event("Music Festival 2026", "TicketBox Organizer", 500000);
+    return event.toString();
+  }
 }

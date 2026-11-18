@@ -51,3 +51,15 @@ Content-Type: application/json
 ### C03L08-03: Đổi giá hàng loạt
 PUT http://localhost:8080/api/events/price?organizer=Code%20Academy&newPrice=1000
 Content-Type: application/json
+
+### DELETE Event By Id
+DELETE http://localhost:8080/api/events/2
+Content-Type: application/json
+
+### DELETE Event By Id (Không tồn tại)
+DELETE http://localhost:8080/api/events/999
+Content-Type: application/json
+
+
+
+
