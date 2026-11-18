@@ -66,4 +66,6 @@ DELETE http://localhost:8080/api/events?organizer=Code%20Academy
 ### DELETE Events By Organizer (Thiếu tham số — bị từ chối)
 DELETE http://localhost:8080/api/events
 
-
+### DELETE ALL EVENTS
+DELETE http://localhost:8080/api/events/all
+Content-Type: application/json

@@ -29,10 +29,12 @@ public interface EventDAO {
   // C03L08-03: Đổi giá vé hàng loạt theo nhà tổ chức, trả về số dòng đã cập nhật
   int updateTicketPriceByOrganizer(String organizerName, int newPrice);
 
-  // C03L09-01: Bước 1. Thêm phương thức Xóa một sự kiện theo ID
+  // C03L09-01: Bước 1: Thêm phương thức Xóa một sự kiện theo ID
   void delete(Integer id);
 
-  // C03L09-03: Bước 1. Xóa hàng loạt theo Nhà Tổ Chức, trả về số dòng đã Xóa
+  // C03L09-03: Bước 1: Xóa hàng loạt theo Nhà Tổ Chức, trả về số dòng đã Xóa
   int deleteByOrganizerName(String organizerName);
 
+  // C03L09-04: Bước 1: Xóa tất cả Events, trả về số dòng đã xóa
+  int deleteAll();
 }

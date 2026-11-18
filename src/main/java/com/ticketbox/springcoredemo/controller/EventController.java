@@ -147,4 +147,10 @@ public class EventController {
     return Map.of("deletedRows", rows);
   }
 
+  // C03L09-04: Bước 3: Controller - Xóa TOÀN BỘ Events
+  @DeleteMapping("/api/events/all")
+  public Map<String, Integer> deleteAllEvents() {
+    int numRowsDeleted = eventDAO.deleteAll();
+    return Map.of("deletedRows", numRowsDeleted);
+  }
 }

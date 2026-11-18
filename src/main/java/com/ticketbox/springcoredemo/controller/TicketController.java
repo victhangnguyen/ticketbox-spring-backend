@@ -1,6 +1,7 @@
 // Path: src/main/java/com/ticketbox/springcoredemo/controller/TicketController.java
 package com.ticketbox.springcoredemo.controller;
 
+import com.ticketbox.springcoredemo.dao.EventDAO;
 import com.ticketbox.springcoredemo.entity.Event;
 import com.ticketbox.springcoredemo.service.NotificationService;
 import com.ticketbox.springcoredemo.service.PaymentGatewayService;
