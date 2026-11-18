@@ -29,4 +29,7 @@ public interface EventDAO {
   // C03L08-03: Đổi giá vé hàng loạt theo nhà tổ chức, trả về số dòng đã cập nhật
   int updateTicketPriceByOrganizer(String organizerName, int newPrice);
 
+  // C03L09-01: Bước 1. Thêm phương thức Xóa một sự kiện theo ID
+  void delete(Integer id);
+
 }

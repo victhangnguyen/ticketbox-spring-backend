@@ -43,8 +43,8 @@ PUT http://localhost:8080/api/events/4
 Content-Type: application/json
 
 {
-  "eventName": "Dem Nhac Jazz",
-  "organizerName": "Jazz Club",
+  "eventName": "Dem Nhac Jazz 4",
+  "organizerName": "Jazz Club 4",
   "ticketPrice": 380000
 }
 

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,10 +39,13 @@ public class EventController {
 
   // Nhan JSON tu app di dong, luu xuong MySQL, tra ve event kem id that
   @PostMapping("/api/events")
-  public Event createEvent(@RequestBody Event event) {
+  public ResponseEntity<Event> createEvent(@RequestBody Event event) {
     eventDAO.save(event); // persist -> INSERT
-    return event; // event luc nay da co id do MySQL sinh ra
+    // return event; // event luc nay da co id do MySQL sinh ra
+    //! CREATE: tra ve HTTP 201 + du lieu moi tao
+    return ResponseEntity.status(HttpStatus.CREATED).body(event);
   }
+
 
   // Endpoint moi: luu nhieu su kien, tra ve danh sach kem id do MySQL cap
   @PostMapping("/api/events/batch")
@@ -100,6 +105,7 @@ public class EventController {
     // ! Merge sẽ lưu các thay đổi xuống EntityManager và database; cần
     // @Transactional trong DAO
     eventDAO.update(existing);
+    System.out.println("ResponseEntity.ok(existing): " + ResponseEntity.ok(existing));
     return ResponseEntity.ok(existing);
   }
 

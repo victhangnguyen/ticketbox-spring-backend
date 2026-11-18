@@ -87,14 +87,28 @@ public class EventDAOImpl implements EventDAO {
   @Override
   @Transactional
   public int updateTicketPriceByOrganizer(String organizerName, int newPrice) {
-    // Event là tên Entity (class), ticketPrice/organizerName là tên field Java, KHÔNG phải tên cột trong bảng
-    // Dùng Query thường (không phải TypedQuery) vì UPDATE không trả về danh sách Event
+    // Event là tên Entity (class), ticketPrice/organizerName là tên field Java,
+    // KHÔNG phải tên cột trong bảng
+    // Dùng Query thường (không phải TypedQuery) vì UPDATE không trả về danh sách
+    // Event
     Query theQuery = entityManager.createQuery(
         "UPDATE Event SET ticketPrice = :newPrice WHERE organizerName = :org");
     theQuery.setParameter("newPrice", newPrice);
     theQuery.setParameter("org", organizerName);
 
-    return theQuery.executeUpdate(); // so dong bi anh huong
+    System.out.println("updateTicketPriceByOrganizer: " + theQuery.executeUpdate());
+    return theQuery.executeUpdate(); // số dòng đã cập nhật (bị ảnh hưởng)
+  }
+
+  // C03L09-01: Bước 2. Thao tác XÓA Sư kiện, thay đổi dữ liệu nên BẮT BUỘC phải có @Transactional
+  @Override
+  @Transactional
+  public void delete(Integer id) {
+    // Retrieve the event / Lấy ự kiện theo ID (theEvent có thể null nếu không tìm thấy)
+    Event theEvent = entityManager.find(Event.class, id);
+
+    // Delete the event / Xóa sự kiện (theEvent phải khác null)
+    entityManager.remove(theEvent);
   }
 
 }
