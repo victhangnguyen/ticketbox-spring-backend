@@ -118,9 +118,9 @@ public class EventController {
     return Map.of("updatedRows", rows);
   }
 
-  // C03L09-02: Bước 2: Controller - Xóa một Event.
+  // C03L09-02: Bước 3: Controller - Xóa một Event.
+  // C03L09-03: Bước 3. Controller - Xóa một Event.
   // 404 nếu không tồn tại, 204 nếu đã xóa
-
   @DeleteMapping("/api/events/{id}")
   public ResponseEntity<Void> deleteEvent(@PathVariable int id) {
     if (eventDAO.findById(id) == null) {
@@ -131,4 +131,20 @@ public class EventController {
     eventDAO.delete(id);
     return ResponseEntity.noContent().build(); // HTTP 204
   }
+
+  // Endpoint tam thoi de xac nhan Entity anh xa dung cau truc (CHUA luu database)
+  @GetMapping("/api/events/preview")
+  public String previewEvent() {
+    Event event = new Event("Music Festival 2026", "TicketBox Organizer", 500000);
+    return event.toString();
+  }
+
+  // C03L09-03: Bước 3: Controller - Xóa hàng loạt Event dựa trên Organizer
+  // Tham số "organizer" là BẮT BUỘC
+  @DeleteMapping("/api/events")
+  public Map<String, Integer> deleteByOrganizer(@RequestParam String organizer) {
+    int rows = eventDAO.deleteByOrganizerName(organizer);
+    return Map.of("deletedRows", rows);
+  }
+
 }

@@ -32,4 +32,7 @@ public interface EventDAO {
   // C03L09-01: Bước 1. Thêm phương thức Xóa một sự kiện theo ID
   void delete(Integer id);
 
+  // C03L09-03: Bước 1. Xóa hàng loạt theo Nhà Tổ Chức, trả về số dòng đã Xóa
+  int deleteByOrganizerName(String organizerName);
+
 }

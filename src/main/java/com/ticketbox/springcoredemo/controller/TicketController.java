@@ -7,7 +7,10 @@ import com.ticketbox.springcoredemo.service.PaymentGatewayService;
 import com.ticketbox.springcoredemo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,12 +50,5 @@ public class TicketController {
   public String processPayment(@RequestParam("eventName") String eventName,
       @RequestParam("amount") double amount) {
     return paymentGatewayService.processPayment(eventName, amount);
-  }
-
-  // Endpoint tam thoi de xac nhan Entity anh xa dung cau truc (CHUA luu database)
-  @GetMapping("/api/events/preview")
-  public String previewEvent() {
-    Event event = new Event("Music Festival 2026", "TicketBox Organizer", 500000);
-    return event.toString();
   }
 }

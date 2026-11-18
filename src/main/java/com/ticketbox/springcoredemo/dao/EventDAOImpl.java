@@ -100,14 +100,31 @@ public class EventDAOImpl implements EventDAO {
     return theQuery.executeUpdate(); // số dòng đã cập nhật (bị ảnh hưởng)
   }
 
-  // C03L09-01: Bước 2. Thao tác XÓA Sư kiện, thay đổi dữ liệu nên BẮT BUỘC phải có @Transactional
+  // C03L09-01: Bước 2. Thao tác XÓA Sư kiện, thay đổi dữ liệu nên BẮT BUỘC phải
+  // có @Transactional
   @Override
   @Transactional
   public void delete(Integer id) {
-    // Retrieve the event / Lấy ự kiện theo ID (theEvent có thể null nếu không tìm thấy)
+    // Retrieve the event / Lấy ự kiện theo ID (theEvent có thể null nếu không tìm
+    // thấy)
     Event theEvent = entityManager.find(Event.class, id);
 
     // Delete the event / Xóa sự kiện (theEvent phải khác null)
     entityManager.remove(theEvent);
   }
+
+  // C03L09-03: Bước 2. Định nghĩa deleteByOrganizerName
+  @Override
+  // Thao tác Xóa nên bắt buộc có @Transactional
+  @Transactional 
+  public int deleteByOrganizerName(String organizerName) {
+    // "Event" Entity, 
+    // "organizerName" là tên field trong Event
+    Query theQuery = entityManager.createQuery(
+        "DELETE FROM Event WHERE organizerName = :org");
+    theQuery.setParameter("org", organizerName);
+
+    return theQuery.executeUpdate(); // so dong bi xoa
+  }
+
 }
