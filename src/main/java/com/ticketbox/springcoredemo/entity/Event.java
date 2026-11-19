@@ -1,41 +1,40 @@
+// Path: src/main/java/com/ticketbox/springcoredemo/entity/Event.java
 package com.ticketbox.springcoredemo.entity;
-
-import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "event") // Buoc 1: anh xa class toi bang "event"
+@Table(name = "event")
 public class Event {
 
-  // Buoc 2: anh xa tung field toi dung cot database
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private int id;
 
-  @Column(name = "event_name")
+  // C03L10-02: Điều Chỉnh Câu Lệnh CREATE TABLE Bằng @Column(nullable, length)
+  // nullable = false -> cột NOT NULL; length = 128 -> varchar(128) thay cho mặc
+  // định 255
+  @Column(name = "event_name", nullable = false, length = 128)
   private String eventName;
 
-  @Column(name = "organizer_name")
+  @Column(name = "organizer_name", nullable = false, length = 128)
   private String organizerName;
 
-  @Column(name = "ticket_price")
+  // Kiểu nguyên thủy int luôn là NOT NULL
+  @Column(name = "ticket_price", nullable = false)
   private int ticketPrice;
 
-  // Khi bạn tự khai báo constructor có tham số, Java sẽ không tự tạo constructor mặc định nữa.
-  // Hibernate cần constructor không tham số để khởi tạo Entity khi đọc dữ liệu từ MySQL.
+  // Bắt buộc có constructor không tham số cho Entity
   public Event() {
   }
 
-  // Constructor co tham so (khong bao gom id, vi id duoc database tu sinh)
   public Event(String eventName, String organizerName, int ticketPrice) {
     this.eventName = eventName;
     this.organizerName = organizerName;
     this.ticketPrice = ticketPrice;
   }
 
-  // Getters va Setters
   public int getId() {
     return id;
   }

@@ -11,6 +11,13 @@ Content-Type: application/json
   "ticketPrice": 0
 }
 
+### POST - CREATE EVENT
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{ "organizerName": "NXB Tre", "ticketPrice": 0 }
+  
+
 ### Link URL của Controller để vận hành Output: POST http://localhost:8080/api/events/batch — thân request (JSON):
 
 POST http://localhost:8080/api/events/batch
