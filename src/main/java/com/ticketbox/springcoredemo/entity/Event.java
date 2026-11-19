@@ -25,6 +25,11 @@ public class Event {
   @Column(name = "ticket_price", nullable = false)
   private int ticketPrice;
 
+  // C03L10-03: Địa điểm tổ chức: cho phép NULL để các sự kiện cũ chưa có địa điểm
+  // vẫn hợp lệ
+  @Column(name = "venue", length = 128)
+  private String venue;
+
   // Bắt buộc có constructor không tham số cho Entity
   public Event() {
   }
@@ -65,6 +70,15 @@ public class Event {
 
   public void setTicketPrice(int ticketPrice) {
     this.ticketPrice = ticketPrice;
+  }
+
+  // C03L10-03: Địa điểm tổ chức: cho phép NULL để các sự kiện cũ chưa có địa điểm
+  public String getVenue() {
+    return venue;
+  }
+
+  public void setVenue(String venue) {
+    this.venue = venue;
   }
 
   @Override
