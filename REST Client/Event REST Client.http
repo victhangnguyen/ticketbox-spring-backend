@@ -1,5 +1,10 @@
-### GET EVENT
-GET http://localhost:8080/api/events/sample
+@baseUrl = http://localhost:8080
+
+
+### GET EVENT SAMPLE
+GET {{baseUrl}}/api/events/sample
+Accept: application/json
+
 
 ### CREATE EVENT
 POST http://localhost:8080/api/events
@@ -30,7 +35,8 @@ Content-Type: application/json
 ]
 
 ### GET EVENT BY ID
-GET http://localhost:8080/api/events/1
+GET {{baseUrl}}/api/events/1
+Accept: application/json
 
 
 ### GET EVENTS

@@ -66,11 +66,7 @@ public class EventController {
     return eventDAO.findByOrganizerName(organizer);
   }
 
-  // Endpoint moi: doc mot su kien theo khoa chinh
-  // @GetMapping("/api/events/{id}")
-  // public Event getEvent(@PathVariable int id) {
-  // return eventDAO.findById(id);
-  // }
+  // C04L01-01: Trả 200 kèm JSON nếu tìm thấy, 404 nếu không có sự kiện với mã này
   @GetMapping("/api/events/{id}")
   public ResponseEntity<Event> getEvent(@PathVariable int id) {
     Event event = eventDAO.findById(id);
