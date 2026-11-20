@@ -3,12 +3,13 @@ package com.ticketbox.springcoredemo.controller;
 
 import com.ticketbox.springcoredemo.dao.EventDAO;
 import com.ticketbox.springcoredemo.entity.Event;
+
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +39,13 @@ public class EventController {
     return new Event("Music Festival 2026", "TicketBox Organizer", 500000);
   }
 
-  // Nhan JSON tu app di dong, luu xuong MySQL, tra ve event kem id that
+  // C04L01-03: CRUD Đầy Đủ Qua HTTP
+  // Bốn Phương Thức Và Các Mã Trạng Thái 201, 204, 400, 404, 405, 415
   @PostMapping("/api/events")
   public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+    // Sau lệnh này Event đã có id do MySQL cấp
     eventDAO.save(event); // persist -> INSERT
-    // return event; // event luc nay da co id do MySQL sinh ra
-    // ! CREATE: tra ve HTTP 201 + du lieu moi tao
-    return ResponseEntity.status(HttpStatus.CREATED).body(event);
+    return ResponseEntity.created(URI.create("/api/events/" + event.getId())).body(event);
   }
 
   // Endpoint moi: luu nhieu su kien, tra ve danh sach kem id do MySQL cap

@@ -1,0 +1,47 @@
+# Path: http-requests/03-crud-status-codes.http
+// C04L01-03: CRUD Đầy Đủ Qua HTTP - Bốn Phương Thức Và Các Mã Trạng Thái 201, 204, 400, 404, 405, 415
+@baseUrl = http://localhost:8080
+
+### 1. POST — TẠO SỰ KIỆN MỚI (Create)
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "eventName": "Workshop Spring Boot",
+  "organizerName": "Luv2code Academy",
+  "ticketPrice": 300000
+}
+
+### 2. GET — ĐỌC SỰ KIỆN VỪA TẠO (Read)
+GET {{baseUrl}}/api/events/2
+
+### 3. PUT — CẬP NHẬT GIÁ VÉ (Update)
+PUT {{baseUrl}}/api/events/2
+Content-Type: application/json
+
+{
+  "eventName": "Workshop Spring Boot",
+  "organizerName": "Luv2code Academy",
+  "ticketPrice": 350000
+}
+
+### 4. DELETE — XÓA SỰ KIỆN (Delete)
+DELETE {{baseUrl}}/api/events/2
+
+### 5. GET — ĐỌC LẠI SỰ KIỆN ĐÃ XÓA
+GET {{baseUrl}}/api/events/2
+
+### 6. PATCH — PHƯƠNG THỨC KHÔNG ĐƯỢC HỖ TRỢ
+PATCH {{baseUrl}}/api/events/1
+Content-Type: application/json
+
+{ "ticketPrice": 1 }
+
+### 7. POST — SAI CONTENT-TYPE
+POST {{baseUrl}}/api/events
+Content-Type: text/plain
+
+Workshop Spring Boot
+
+### 8. GET — ĐƯỜNG DẪN KHÔNG PHẢI SỐ
+GET {{baseUrl}}/api/events/abc
