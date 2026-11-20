@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:8080/api/http-demo
+
+# C04L01-02: Một Backend Trả Về Nhiều MIME Type Và Cách Client Báo Định Dạng Mong Muốn
+
+### MIME Type: text/html — trình duyệt sẽ hiển thị theo thẻ HTML
+GET {{baseUrl}}/text
+
+### MIME Type: text/html — trình duyệt sẽ hiển thị theo thẻ HTML
+GET {{baseUrl}}/html
+
+### MIME Type: application/json — dữ liệu để ứng dụng xử lý
+GET {{baseUrl}}/json
+
+### Đọc header của yêu cầu mà client đã gửi lên
+GET {{baseUrl}}/headers
+
+### Trả về đúng mã trạng thái mà client yêu cầu để học sinh quan sát
+### HTTP 200 OK
+GET {{baseUrl}}/status/200
+
+
+### HTTP 201 CREATED
+GET {{baseUrl}}/status/201
+
+### HTTP 400 BAD REQUEST
+GET {{baseUrl}}/status/400
+
+### HTTP 401 UNAUTHORIZED
+GET {{baseUrl}}/status/401
+
+### HTTP 403 FORBIDDEN
+GET {{baseUrl}}/status/403
+
+### HTTP 404 NOT FOUND
+GET {{baseUrl}}/status/404
+
+### HTTP 500 INTERNAL SERVER ERROR
+GET {{baseUrl}}/status/500
+
+### Invalid status code
+GET {{baseUrl}}/status/999
